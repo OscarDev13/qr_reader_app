@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qr_reader_2/db_provider.dart';
+import 'package:qr_reader_2/providers/db_provider.dart';
 import 'package:qr_reader_2/pages/home_page.dart';
 import 'package:qr_reader_2/pages/mapa_page.dart';
+import 'package:qr_reader_2/providers/scan_list_provider.dart';
 import 'package:qr_reader_2/providers/ui_provider.dart';
 
-import 'db_provider.dart';
+// import 'providers/db_provider.dart';
 
 void main() => runApp(const MyApp());
 
@@ -20,7 +21,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       // Vamos a tener varios proovedores de informacion
       providers: [
-        ChangeNotifierProvider( create: (_) => UiProvider() ),
+        ChangeNotifierProvider( create: (_) => UiProvider() ), 
+        ChangeNotifierProvider( create: (_) => ScanListProvider() ),
+
       ],
 
       child: MaterialApp(

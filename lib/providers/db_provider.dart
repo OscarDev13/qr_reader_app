@@ -6,11 +6,13 @@ import 'dart:io';
 // import 'dart:js_interop';
 
 import 'package:path/path.dart';
-import 'package:qr_reader_2/models/scan_model.dart';
-import 'package:sqflite/sqflite.dart';
-
 import 'package:path_provider/path_provider.dart';
-export 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:qr_reader_2/models/scan_model.dart';
+export 'package:qr_reader_2/models/scan_model.dart';
+
+// export 'package:path_provider/path_provider.dart';
+
 
 class DBProvider {
   static Database? _database;
@@ -101,12 +103,42 @@ class DBProvider {
     return res.isNotEmpty ? ScanModel.fromMap(res.first ) : null;
   }
 
+  // obtener los scans mediante el tipo
+  // dynamic getScansByType(String tipo) async {
+  //   final db = await database;
+  //   final res = await db.rawQuery('''
+  //   SELECT * FROM Scans WHERE Tipo = $tipo
+  //   ''');
+  //   // return res.isNotEmpty ? ScanModel.fromMap(res.first ) : [];
+  //   return res.isNotEmpty ? res.map((s) => ScanModel.fromMap(s)).toList() : [];
+  // }
+
   dynamic getScansByType(String tipo) async {
     final db = await database;
-    final res = await db.rawQuery('''
-    SELECT * FROM Scans WHERE Tipo = $tipo
+    final res = await db.query('Scans', where: 'tipo = ?', whereArgs: [tipo]);
+    return res.isNotEmpty ? res.map((s) => ScanModel.fromMap(s)).toList() : [];
+  }
+
+  // actualizar un registro mediante id
+  dynamic updateScan(ScanModel nuevoScan) async {
+    final db = await database;
+    final res = await db.update('Scans', nuevoScan.toJson(), where: 'id = ?', whereArgs: [nuevoScan.id]);
+    // final res = await db.update('Scans', nuevoScan.toJson()); // aplica para todos los registros de la base de datos
+    return res;
+  }
+
+  dynamic deleteScan(int id ) async {
+    final db = await database;
+    final res = await db.delete('Scans', where: 'id = ?', whereArgs: [id]);
+    return res;
+  }
+
+  dynamic deleteScans() async {
+    final db = await database;
+    final res = await db.rawDelete('''
+    DELETE FROM Scans
     ''');
-    return res.isNotEmpty ? ScanModel.fromMap(res.first ) : [];
+    return res;
   }
 
   
