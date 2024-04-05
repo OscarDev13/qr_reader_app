@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_reader_2/providers/db_provider.dart';
-import 'package:qr_reader_2/models/scan_model.dart';
+// import 'package:qr_reader_2/models/scan_model.dart';
 import 'package:qr_reader_2/pages/direcciones_page.dart';
 // import 'package:qr_reader_2/pages/mapa_page.dart';
 import 'package:qr_reader_2/pages/mapas_page.dart';
@@ -25,9 +25,9 @@ class HomePage extends StatelessWidget {
     return  Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text('Historial'),
+        title: const Text('Historial', style: TextStyle(color: Colors.white),),
         actions: [
-          IconButton(onPressed: ()=> scanListProvider.borrarTodos(), icon: Icon(Icons.delete_forever))
+          IconButton(onPressed: ()=> scanListProvider.borrarTodos(), icon: const Icon(Icons.delete_forever, color: Colors.white,))
         ],
       ),
       body: _HomePageBody(),
@@ -53,8 +53,8 @@ class _HomePageBody extends StatelessWidget {
 
     //todo: temporal leer la base de datos
     // DBProvider.db.initDB();
-    final tempScan = ScanModel( valor: 'http://google.com');
-    DBProvider.db.nuevoScan(tempScan);
+    // final tempScan = ScanModel( valor: 'http://google.com');
+    // DBProvider.db.nuevoScan(tempScan);
     // DBProvider.db.getScanById(1).then((scan) => print(scan.valor)); 
     // DBProvider.db.showAllScans().then(print);
     // DBProvider.db.deleteScans().then(print);
