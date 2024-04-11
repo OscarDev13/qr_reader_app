@@ -25,3 +25,21 @@ launchURL(BuildContext context, ScanModel scanModel ) async {
   }
 
 }
+
+// Future<void> launchURL( BuildContext context, ScanModel scan  ) async {
+ 
+//   final url = scan.valor;
+ 
+//   if ( scan.tipo == 'http' ) {
+//     //. link web.
+//     if (await canLaunchUrl(Uri.parse(url))) {
+//       await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView);
+//     } else {
+//       throw 'Could not launch $url'; 
+//     }
+ 
+//   } else {
+//     Navigator.pushNamed(context, 'mapa', arguments: scan );
+//   }
+ 
+// }
